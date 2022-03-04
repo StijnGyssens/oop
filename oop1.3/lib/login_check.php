@@ -5,7 +5,7 @@ ini_set( 'display_errors', 1 );
 $public_access = true;
 require_once "autoload.php";
 
-$user = LoginCheck();
+$user = LoginCheck($dbm);
 
 if ( $user )
 {
@@ -19,7 +19,7 @@ else
     GoToNoAccess();
 }
 
-function LoginCheck()
+function LoginCheck($dbm)
 {
     if ( $_SERVER['REQUEST_METHOD'] == "POST" )
     {
@@ -61,7 +61,7 @@ function LoginCheck()
         $ww = $_POST['usr_password'];
 
         $sql = "SELECT * FROM user WHERE usr_email='$email' ";
-        $data = GetData($sql);
+        $data = $dbm->GetData($sql);
 
         if ( count($data) > 0 )
         {

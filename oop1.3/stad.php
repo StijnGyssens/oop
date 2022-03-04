@@ -16,7 +16,7 @@ PrintNavbar();
 
         if ( ! is_numeric( $_GET['img_id']) ) die("Ongeldig argument " . $_GET['img_id'] . " opgegeven");
 
-        $rows = GetData( "select * from image where img_id=" . $_GET['img_id'] );
+        $rows = $dbm->GetData( "select * from image where img_id=" . $_GET['img_id'] );
 
 
         //get template

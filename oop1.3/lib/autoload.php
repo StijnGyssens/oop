@@ -1,8 +1,9 @@
 <?php
-$app_root2 = "/oop1.2";
+$app_root2 = "/oop1.3";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/models/City.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/models/User.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/CityLoader.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/DBManager.php";
 session_start();
 
 //print json_encode($_SERVER); exit;
@@ -11,7 +12,6 @@ $app_root = "/" . $request_uri[1] . "/" . $request_uri[2];
 
 
 require_once "connection_data.php";
-require_once "pdo.php";
 require_once "html_functions.php";
 require_once "form_elements.php";
 require_once "sanitize.php";
@@ -46,3 +46,12 @@ if ( key_exists( 'OLD_POST', $_SESSION ) AND is_array( $_SESSION['OLD_POST']) )
     $old_post = $_SESSION['OLD_POST'];
     $_SESSION['OLD_POST'] = [];
 }
+
+$configuration =[
+    "servername" => "localhost",
+    "username" => "root",
+    "password" => "rootpaswoord",
+    "dbname" => "steden2",
+];
+
+$dbm= new DBManager($configuration);

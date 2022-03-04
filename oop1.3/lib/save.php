@@ -5,9 +5,9 @@ ini_set( 'display_errors', 1 );
 $public_access = true;
 require_once "autoload.php";
 
-SaveFormData();
+SaveFormData($dbm);
 
-function SaveFormData()
+function SaveFormData($dbm)
 {
     if ( $_SERVER['REQUEST_METHOD'] == "POST" )
     {
@@ -32,18 +32,18 @@ function SaveFormData()
 
         //validation
         $sending_form_uri = $_SERVER['HTTP_REFERER'];
-        CompareWithDatabase( $table, $pkey );
+        CompareWithDatabase( $table, $pkey,$dbm );
 
         //Validaties voor het registratieformulier
         if ( $table == "user" )
         {
                 ValidateUsrPassword( $_POST['usr_password'] );
                 ValidateUsrEmail( $_POST['usr_email'] );
-                CheckUniqueUsrEmail( $_POST['usr_email'] );
+                CheckUniqueUsrEmail( $_POST['usr_email'],$dbm );
         }
 
         //terugkeren naar afzender als er een fout is
-        if ( count($_SESSION['errors']) > 0 )
+        if ( key_exists( 'errors', $_SESSION ) AND count($_SESSION['errors']) > 0 )
         {
             $_SESSION['OLD_POST'] = $_POST;
             header( "Location: " . $sending_form_uri ); exit();
@@ -94,7 +94,7 @@ function SaveFormData()
         $sql .= $where;
 
         //run SQL
-        $result = ExecuteSQL( $sql );
+        $result = $dbm->ExecuteSQL( $sql );
 
         //output if not redirected
         print $sql ;

@@ -5,9 +5,9 @@ ini_set( 'display_errors', 1 );
 $public_access = true;
 require_once "autoload.php";
 
-SaveFormData();
+SaveFormData($dbm);
 
-function SaveFormData()
+function SaveFormData($dbm)
 {
     if ( $_SERVER['REQUEST_METHOD'] == "POST" )
     {
@@ -32,7 +32,7 @@ function SaveFormData()
 
         //validation
         $sending_form_uri = $_SERVER['HTTP_REFERER'];
-        CompareWithDatabase( $table, $pkey );
+        CompareWithDatabase( $table, $pkey ,$dbm);
 
         //Validaties voor het registratieformulier
         if ( $table == "user" )

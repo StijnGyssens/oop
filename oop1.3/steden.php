@@ -22,7 +22,7 @@ PrintNavbar();
 //    }
 
     //get data
-    $data = GetData( "select * from image" );
+    $data = $dbm->GetData( "select * from image" );
 
     //get template
     $template = file_get_contents("templates/column.html");
