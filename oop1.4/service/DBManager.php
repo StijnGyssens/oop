@@ -4,9 +4,11 @@ class DBManager
 {
     private $configuration;
     private $conn;
+    private $logger;
 
-    public function __construct(array $configuration){
+    public function __construct(array $configuration,$logger){
         $this->configuration=$configuration;
+        $this->logger=$logger;
     }
 
     /**
@@ -35,6 +37,7 @@ class DBManager
      */
     public function GetData( $sql )
     {
+        $this->logger->Log($sql);
         $this->CreateConnection();
 
         //define and execute query
@@ -62,6 +65,7 @@ class DBManager
      */
     public function ExecuteSQL( $sql )
     {
+        $this->logger->Log($sql);
         $this->CreateConnection();
 
         //define and execute query
