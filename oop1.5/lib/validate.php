@@ -1,7 +1,7 @@
 <?php
 require_once "autoload.php";
 
-function CompareWithDatabase( $table, $pkey,$dbm ): void
+function CompareWithDatabase( $table, $pkey,$dbm,$ms ): void
 {
     $data = $dbm->GetData( "SHOW FULL COLUMNS FROM $table" );
 
@@ -26,7 +26,7 @@ function CompareWithDatabase( $table, $pkey,$dbm ): void
                 if ( ! isInt($sent_value) ) //nee
                 {
                     $msg = $sent_value . " moet een geheel getal zijn";
-                    $_SESSION['errors'][ "$fieldname" . "_error" ] = $msg;
+                    $ms->AddMessage("input_errors",$msg,"$fieldname" . "_error");
                 }
                 else //ja
                 {
@@ -41,7 +41,7 @@ function CompareWithDatabase( $table, $pkey,$dbm ): void
                 if ( ! is_numeric($sent_value) ) //nee
                 {
                     $msg = $sent_value . " moet een getal zijn (eventueel met decimalen)";
-                    $_SESSION['errors'][ "$fieldname" . "_error" ] = $msg;
+                    $ms->AddMessage("input_errors",$msg,"$fieldname" . "_error");
                 }
                 else //ja
                 {
@@ -66,7 +66,7 @@ function CompareWithDatabase( $table, $pkey,$dbm ): void
                 if ( ! isDate( $sent_value) )
                 {
                     $msg = $sent_value . " is geen geldige datum";
-                    $_SESSION['errors'][ "$fieldname" . "_error" ] = $msg;
+                    $ms->AddMessage("input_errors",$msg,"$fieldname" . "_error");
                 }
             }
 
@@ -75,18 +75,21 @@ function CompareWithDatabase( $table, $pkey,$dbm ): void
     }
 }
 
-function ValidateUsrPassword( $password )
+function ValidateUsrPassword( $password,$ms )
 {
+    /**
+     * @var $ms MessageService
+     */
     if ( strlen($password) < 8 )
     {
-        $_SESSION['errors']['usr_password_error'] = "Het wachtwoord moet minstens 8 tekens bevatten";
+        $ms->AddMessage("input_errors","Het wachtwoord moet minstens 8 tekens bevatten","usr_password_error");
         return false;
     }
 
     return true;
 }
 
-function ValidateUsrEmail( $email )
+function ValidateUsrEmail( $email,$ms )
 {
     if (filter_var($email, FILTER_VALIDATE_EMAIL))
     {
@@ -94,19 +97,19 @@ function ValidateUsrEmail( $email )
     }
     else
     {
-        $_SESSION['errors']['usr_email_error'] = "Geen geldig e-mailadres!";
+        $ms->AddMessage("input_errors","Geen geldig e-mailadres!","usr_email_error");
         return false;
     }
 }
 
-function CheckUniqueUsrEmail( $email,$dbm )
+function CheckUniqueUsrEmail( $email,$dbm,$ms )
 {
     $sql = "SELECT * FROM user WHERE usr_email='" . $email . "'";
     $rows = $dbm->GetData($sql);
 
     if (count($rows) > 0)
     {
-        $_SESSION['errors']['usr_email_error'] = "Er bestaat al een gebruiker met dit e-mailadres";
+        $ms->AddMessage("input_errors","Er bestaat al een gebruiker met dit e-mailadres","usr_email_error");
         return false;
     }
 

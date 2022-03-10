@@ -22,23 +22,6 @@ require_once "security.php";
 
 require_once "access_control.php";
 
-//initialize $errors array
-$errors = [];
-
-if ( key_exists( 'errors', $_SESSION ) AND is_array( $_SESSION['errors']) )
-{
-    $errors = $_SESSION['errors'];
-    $_SESSION['errors'] = [];
-}
-
-//initialize $msgs array
-$msgs = [];
-
-if ( key_exists( 'msgs', $_SESSION ) AND is_array( $_SESSION['msgs']) )
-{
-    $msgs = $_SESSION['msgs'];
-    $_SESSION['msgs'] = [];
-}
 
 //initialize $old_post
 $old_post = [];

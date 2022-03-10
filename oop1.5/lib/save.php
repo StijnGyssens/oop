@@ -9,6 +9,9 @@ SaveFormData($dbm,$ms);
 
 function SaveFormData($dbm,$ms)
 {
+    /**
+     * @var $ms MessageService
+     */
     if ( $_SERVER['REQUEST_METHOD'] == "POST" )
     {
         //controle CSRF token
@@ -32,18 +35,20 @@ function SaveFormData($dbm,$ms)
 
         //validation
         $sending_form_uri = $_SERVER['HTTP_REFERER'];
-        CompareWithDatabase( $table, $pkey,$dbm );
+        CompareWithDatabase( $table, $pkey,$dbm,$ms );
 
         //Validaties voor het registratieformulier
         if ( $table == "user" )
         {
-                ValidateUsrPassword( $_POST['usr_password'] );
-                ValidateUsrEmail( $_POST['usr_email'] );
-                CheckUniqueUsrEmail( $_POST['usr_email'],$dbm );
+                ValidateUsrPassword( $_POST['usr_password'],$ms );
+                ValidateUsrEmail( $_POST['usr_email'],$ms );
+                CheckUniqueUsrEmail( $_POST['usr_email'],$dbm,$ms );
         }
 
+        //var_dump($_SESSION); die();
+
         //terugkeren naar afzender als er een fout is
-        if ( key_exists( 'errors', $_SESSION ) AND count($_SESSION['errors']) > 0 )
+        if ($ms->CountNewErrors()>0 || $ms->CountNewInputErrors()>0 )
         {
             $_SESSION['OLD_POST'] = $_POST;
             header( "Location: " . $sending_form_uri ); exit();

@@ -61,7 +61,7 @@ class MessageService
 
     public function AddMessage($type,$msg,$key=null)
     {
-        if ($key)$_SESSION[$type][$key]=$msg;
+        if ($key) $_SESSION[$type][$key]=$msg;
         else $_SESSION[$type][]=$msg;
     }
 
