@@ -1,10 +1,11 @@
 <?php
-$app_root2 = "/oop1.4";
+$app_root2 = "/oop1.5";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/models/City.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/models/User.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/CityLoader.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/DBManager.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/Logger.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/MessageService.php";
 session_start();
 
 //print json_encode($_SERVER); exit;
@@ -57,3 +58,4 @@ $configuration =[
 
 $logger = new Logger();
 $dbm= new DBManager($configuration,$logger);
+$ms = new MessageService();
