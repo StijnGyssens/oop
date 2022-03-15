@@ -4,14 +4,14 @@ ini_set( 'display_errors', 1 );
 
 $public_access = true;
 require_once "autoload.php";
+$container= new Container($configuration);
 
-SaveFormData($dbm,$ms);
+SaveFormData($container);
 
-function SaveFormData($dbm,$ms)
+function SaveFormData(Container $container)
 {
-    /**
-     * @var $ms MessageService
-     */
+    $ms= $container->getMS();
+    $dbm=$container->getDBM();
     if ( $_SERVER['REQUEST_METHOD'] == "POST" )
     {
         //controle CSRF token
@@ -35,14 +35,14 @@ function SaveFormData($dbm,$ms)
 
         //validation
         $sending_form_uri = $_SERVER['HTTP_REFERER'];
-        CompareWithDatabase( $table, $pkey,$dbm,$ms );
+        CompareWithDatabase( $table, $pkey,$container );
 
         //Validaties voor het registratieformulier
         if ( $table == "user" )
         {
-                ValidateUsrPassword( $_POST['usr_password'],$ms );
-                ValidateUsrEmail( $_POST['usr_email'],$ms );
-                CheckUniqueUsrEmail( $_POST['usr_email'],$dbm,$ms );
+                ValidateUsrPassword( $_POST['usr_password'],$container );
+                ValidateUsrEmail( $_POST['usr_email'],$container );
+                CheckUniqueUsrEmail( $_POST['usr_email'],$container );
         }
 
         //var_dump($_SESSION); die();

@@ -6,6 +6,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/CityLoader.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/DBManager.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/Logger.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/MessageService.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/Container.php";
 session_start();
 
 //print json_encode($_SERVER); exit;
@@ -39,6 +40,6 @@ $configuration =[
     "dbname" => "steden2",
 ];
 
-$logger = new Logger();
-$dbm= new DBManager($configuration,$logger);
-$ms = new MessageService();
+//$logger = new Logger();
+//$dbm= new DBManager($configuration,$logger);
+//$ms = new MessageService();

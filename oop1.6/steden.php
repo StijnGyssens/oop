@@ -3,6 +3,9 @@ error_reporting( E_ALL );
 ini_set( 'display_errors', 1 );
 
 require_once "lib/autoload.php";
+$container = new Container($configuration);
+$ms= $container->getMS();
+$dbm=$container->getDBM();
 
 PrintHead();
 PrintJumbo( $title = "Leuke plekken in Europa" ,

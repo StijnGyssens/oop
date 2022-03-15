@@ -4,13 +4,14 @@ ini_set( 'display_errors', 1 );
 
 $public_access = true;
 require_once "autoload.php";
+$container=new Container($configuration);
 
-$user = LoginCheck($dbm,$ms);
+$user = LoginCheck($container);
 
 if ( $user )
 {
     $_SESSION['user'] = $user;
-    $ms->AddMessage("infos","Welkom, " . $_SESSION['user']->getUsrVoornaam());
+    $container->getMS()->AddMessage("infos","Welkom, " . $_SESSION['user']->getUsrVoornaam());
     header("Location: ../steden.php");
 }
 else
@@ -19,8 +20,10 @@ else
     GoToNoAccess();
 }
 
-function LoginCheck($dbm,$ms)
+function LoginCheck(Container $container)
 {
+    $ms=$container->getMS();
+    $dbm=$container->getDBM();
     if ( $_SERVER['REQUEST_METHOD'] == "POST" )
     {
         //controle CSRF token

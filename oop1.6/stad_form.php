@@ -3,6 +3,9 @@ error_reporting( E_ALL );
 ini_set( 'display_errors', 1 );
 
 require_once "lib/autoload.php";
+$container = new Container($configuration);
+$dbm=$container->getDBM();
+$ms=$container->getMS();
 
 PrintHead();
 PrintJumbo( $title = "Bewerk afbeelding", $subtitle = "" );
@@ -30,7 +33,7 @@ PrintNavbar();
             //merge
             $output = MergeViewWithData( $output, $data );
             $output = MergeViewWithExtraElements( $output, $extra_elements );
-            $output = MergeViewWithErrors( $output, $errors );
+            $output = MergeViewWithErrors( $output, $ms->getInputErrors() );
             $output = RemoveEmptyErrorTags( $output, $data );
 
             print $output;

@@ -4,6 +4,8 @@ ini_set( 'display_errors', 1 );
 
 $public_access = true;
 require_once "lib/autoload.php";
+$container = new Container($configuration);
+$ms= $container->getMS();
 
 PrintHead();
 PrintJumbo( $title = "Registreer", $subtitle = "" );

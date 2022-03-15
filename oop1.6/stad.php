@@ -3,6 +3,8 @@ error_reporting( E_ALL );
 ini_set( 'display_errors', 1 );
 
 require_once "lib/autoload.php";
+$container = new Container($configuration);
+$dbm=$container->getDBM();
 
 PrintHead();
 PrintJumbo();
@@ -22,7 +24,7 @@ PrintNavbar();
         //get template
         $template = file_get_contents("templates/column_full.html");
 
-        $data = new CityLoader($rows);
+        $data = $container->getLoader($rows);
         $city=$data->getCity()->getArray();
 
         $output=$template;
