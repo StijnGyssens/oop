@@ -7,7 +7,7 @@ class Logger
 
     public function __construct(){
         $this->setFp(fopen($_SERVER["DOCUMENT_ROOT"] . "\oop1.7\log\log.txt","a+")) ;
-        $this->logfile=$_SERVER["DOCUMENT_ROOT"] . "\oop1.5\log\log.txt";
+        $this->logfile=$_SERVER["DOCUMENT_ROOT"] . "\oop1.7\log\log.txt";
     }
 
     public function Log($msg){
