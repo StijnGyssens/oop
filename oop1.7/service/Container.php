@@ -7,6 +7,8 @@ class Container
     private $dbm;
     private $logger;
     private $ms;
+    private $landmarkLoader;
+    private $landmarkStorage;
 
     public function __construct(array $config)
     {
@@ -48,5 +50,29 @@ class Container
     {
         $this->loader= new CityLoader($rows);
         return $this->loader;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLandmarkLoader()
+    {
+        if ($this->landmarkLoader===null)
+        {
+            $this->landmarkLoader = new LandmarkLoader($this->getLandmarkStorage());
+        }
+        return $this->landmarkLoader;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLandmarkStorage()
+    {
+        if ($this->landmarkStorage===null)
+        {
+            $this->landmarkStorage= new PdoLandmarkStorage($this->getDBM());
+        }
+        return $this->landmarkStorage;
     }
 }

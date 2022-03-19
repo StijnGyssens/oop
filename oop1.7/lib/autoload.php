@@ -2,11 +2,17 @@
 $app_root2 = "/oop1.7";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/models/City.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/models/User.php";
+require_once __DIR__."/../models/Landmark.php";
+require_once __DIR__."/../models/ManMade.php";
+require_once __DIR__."/../models/Natural.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/CityLoader.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/DBManager.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/Logger.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/MessageService.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/Container.php";
+require_once __DIR__."/../service/LandmarkLoader.php";
+require_once __DIR__."/../service/LandmarkStorageInterface.php";
+require_once __DIR__."/../service/PdoLandmarkStorage.php";
 session_start();
 
 //print json_encode($_SERVER); exit;

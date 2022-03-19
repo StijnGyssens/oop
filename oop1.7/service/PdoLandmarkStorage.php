@@ -2,14 +2,25 @@
 
 class PdoLandmarkStorage implements LandmarkStorageInterface
 {
+    private $pdo;
+
+    public function __construct( $pdo)
+    {
+        $this->pdo=$pdo;
+    }
 
     public function fetchAllLandmarks()
     {
-        // TODO: Implement fetchAllLandmarks() method.
+        $landmarkArray=$this->pdo->GetData('select * from landmark');
+        return $landmarkArray;
     }
 
     public function fetchSingleLandmark($id)
     {
-        // TODO: Implement fetchSingleLandmark() method.
+        $landmarkArray=$this->pdo->GetData('select * from landmark where id= '.$id);
+        if(!$landmarkArray){
+            return null;
+        }
+        return $landmarkArray;
     }
 }
