@@ -71,7 +71,8 @@ class Container
     {
         if ($this->landmarkStorage===null)
         {
-            $this->landmarkStorage= new PdoLandmarkStorage($this->getDBM());
+            //$this->landmarkStorage= new PdoLandmarkStorage($this->getDBM());
+            $this->landmarkStorage= new JsonLandmarkStorage(__DIR__.'/../assets/steden2_landmark.json');
         }
         return $this->landmarkStorage;
     }

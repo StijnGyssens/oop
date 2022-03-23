@@ -13,6 +13,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "$app_root2/service/Container.php";
 require_once __DIR__."/../service/LandmarkLoader.php";
 require_once __DIR__."/../service/LandmarkStorageInterface.php";
 require_once __DIR__."/../service/PdoLandmarkStorage.php";
+require_once __DIR__."/../service/JsonLandmarkStorage.php";
 session_start();
 
 //print json_encode($_SERVER); exit;
