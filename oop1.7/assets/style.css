@@ -26,3 +26,7 @@ div.msgs {
 .errors{
     color: red;
 }
+
+.col-4{
+    margin-bottom: 20px;
+}

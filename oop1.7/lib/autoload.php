@@ -43,8 +43,8 @@ if ( key_exists( 'OLD_POST', $_SESSION ) AND is_array( $_SESSION['OLD_POST']) )
 $configuration =[
     "servername" => "localhost",
     "username" => "root",
-    "password" => "rootpaswoord",
-    "dbname" => "steden2",
+    "password" => "",
+    "dbname" => "steden",
 ];
 
 //$logger = new Logger();

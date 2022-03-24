@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/lib/autoload.php';
 
+
 $container = new Container($configuration);
 $dbm = $container->getDBM();
 $landmarkLoader = $container->getLandmarkLoader();
@@ -25,7 +26,7 @@ foreach ($landmarks as $landmark)
     $img="img/$img";
 
     $html.="
-        <div class='col'>
+        <div class='col-4'>
             <div class='card h-100'>
               <img src='$img' class='card-img-top img-fluid' alt='$name'>
               <div class='card-body'>
