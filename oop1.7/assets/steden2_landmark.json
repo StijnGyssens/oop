@@ -41,14 +41,14 @@
     "rates": "free",
     "builder": null,
     "buildYear": null,
-    "type": null
+    "type": "natural"
   },
   {
     "landmarkID": 5,
     "landmark": "Berlijnse muur",
     "description": "Onder de Berlijnse Muur (Duits: Berliner Mauer) verstaat men de tot 100 meter brede constructie van opeenvolgende obstakels die van 13 augustus 1961 tot 9 november 1989 West-Berlijn geheel omringde. Hiermee was dit deel van de stad geheel gescheiden van Oost-Berlijn en de rest van Oost-Duitsland. De totale grens rond West-Berlijn was een onderdeel van de Duits-Duitse grens en was 167,8 km lang, waarvan 45,1 km werd gevormd door de Berlijnse Muur. De Berlijnse Muur was het bekendste symbool van de Koude Oorlog en de deling van Duitsland. Tijdens vluchtacties bij de Berlijnse Muur zijn minstens 138 mensen om het leven gekomen.",
     "locationId": 3,
-    "imgUrl": null,
+    "imgUrl": "Berlijnse-Muur-in-1989-cc.jpg",
     "rates": "free",
     "builder": " Walter Ulbricht en de Sovjetleider Nikita Chroesjtsjov",
     "buildYear": "1961-08-12",
